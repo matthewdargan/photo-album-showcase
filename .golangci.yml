@@ -1,0 +1,26 @@
+linters:
+  enable-all: true
+  disable:
+    - cyclop
+    - deadcode
+    - depguard
+    - exhaustivestruct
+    - exhaustruct
+    - funlen
+    - gochecknoglobals
+    - gocognit
+    - gocyclo
+    - golint
+    - ifshort
+    - interfacer
+    - lll
+    - maintidx
+    - maligned
+    - nlreturn
+    - nosnakecase
+    - scopelint
+    - structcheck
+    - tagliatelle
+    - varcheck
+    - varnamelen
+    - wsl
