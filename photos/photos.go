@@ -1,3 +1,6 @@
+// Copyright 2023 Matthew P. Dargan.
+// SPDX-License-Identifier: Apache-2.0
+
 package photos
 
 import (
@@ -27,11 +30,11 @@ func NewClient(client *http.Client) *Client {
 
 // Photo represents details about a photo retrieved from the Photos API.
 type Photo struct {
-	AlbumID      int    // unique identifier of the album to which the photo belongs.
-	ID           int    // unique identifier of the photo.
-	Title        string // title of the photo.
-	URL          string // URL to view the full-sized photo.
-	ThumbnailURL string // URL to view the thumbnail version of the photo.
+	AlbumID      int    `json:"albumId"`      // unique identifier of the album to which the photo belongs.
+	ID           int    `json:"id"`           // unique identifier of the photo.
+	Title        string `json:"title"`        // title of the photo.
+	URL          string `json:"url"`          // URL to view the full-sized photo.
+	ThumbnailURL string `json:"thumbnailUrl"` // URL to view the thumbnail version of the photo.
 }
 
 var (
@@ -51,11 +54,11 @@ var (
 // Photos searches for photos in the Photos API and allows filtering by albumIds, ids, titles, urls, and/or thumbnailUrls.
 //
 // Example filters:
-// - Filtering by album ID: params["albumId"] = []string{"1"}
-// - Filtering by ID: params["id"] = []string{"1", "2"}
-// - Filtering by title: params["title"] = []string{"accusamus beatae ad facilis cum similique qui sunt"}
-// - Filtering by URL: params["url"] = []string{"https://via.placeholder.com/600/92c952"}
-// - Filtering by thumbnail URL: params["thumbnailUrl"] = []string{"https://via.placeholder.com/150/92c952"}
+//   - Filtering by album ID: params["albumId"] = []string{"1"}
+//   - Filtering by ID: params["id"] = []string{"1", "2"}
+//   - Filtering by title: params["title"] = []string{"accusamus beatae ad facilis cum similique qui sunt"}
+//   - Filtering by URL: params["url"] = []string{"https://via.placeholder.com/600/92c952"}
+//   - Filtering by thumbnail URL: params["thumbnailUrl"] = []string{"https://via.placeholder.com/150/92c952"}
 func (c *Client) Photos(ctx context.Context, params map[string][]string) ([]Photo, error) {
 	req, err := newRequest(ctx, c.URL, params)
 	if err != nil {

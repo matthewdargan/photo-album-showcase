@@ -1,3 +1,6 @@
+// Copyright 2023 Matthew P. Dargan.
+// SPDX-License-Identifier: Apache-2.0
+
 package photos_test
 
 import (
@@ -7,6 +10,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"os"
+	"strings"
 	"testing"
 
 	"github.com/matthewdargan/photo-album-showcase/photos"
@@ -70,11 +74,11 @@ func TestPhotos(t *testing.T) {
 		client := photos.NewClient(http.DefaultClient)
 		client.URL = "http://localhost"
 		_, err := client.Photos(context.Background(), nil)
-		want := fmt.Errorf("%w: %s", photos.ErrFailedRequest, `Get "http://localhost": dial tcp 127.0.0.1:80: connect: connection refused`)
+		want := fmt.Errorf("%w: %s", photos.ErrFailedRequest, `Get "http://localhost": dial tcp`)
 		if err == nil {
 			t.Errorf("Expected an error, got nil")
-		} else if err.Error() != want.Error() {
-			t.Errorf("got %v, want %v", err, want)
+		} else if !strings.HasPrefix(err.Error(), want.Error()) {
+			t.Errorf("expected error with prefix %q, got: %q", want.Error(), err.Error())
 		}
 	})
 

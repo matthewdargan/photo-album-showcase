@@ -4,8 +4,10 @@ linters:
     - cyclop
     - deadcode
     - depguard
+    - dupword
     - exhaustivestruct
     - exhaustruct
+    - forbidigo
     - funlen
     - gochecknoglobals
     - gocognit
